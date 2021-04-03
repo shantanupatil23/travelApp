@@ -1,6 +1,6 @@
 import http from "../http-common";
 
-class TutorialDataService {
+class DealsService {
   getDeals(source, destination, type) {
     return http.get(
       `/travel/find-route/source=${source}&destination=${destination}`
@@ -11,4 +11,4 @@ class TutorialDataService {
   }
 }
 
-export default new TutorialDataService();
+export default new DealsService();
