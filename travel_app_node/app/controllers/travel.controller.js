@@ -11,8 +11,8 @@ exports.findDeals = (req, res) => {
       try {
         for (const i in deals) {
           if (
-            deals[i].departure === source &&
-            deals[i].arrival === destination
+            deals[i].departure.toUpperCase() === source.toUpperCase() &&
+            deals[i].arrival.toUpperCase() === destination.toUpperCase()
           ) {
             responseData.push(deals[i]);
           }
@@ -33,20 +33,21 @@ exports.places = (req, res) => {
   if (from == null) {
     from = "";
   }
-  console.log(from);
   Datasets.find()
     .then((data) => {
       let responseData = [];
       const deals = data[0].toObject().deals;
       for (const i in deals) {
         if (
-          deals[i].departure.substring(0, from.length) == from &&
+          deals[i].departure.substring(0, from.length).toUpperCase() ==
+            from.toUpperCase() &&
           !responseData.includes(deals[i].departure)
         ) {
           responseData.push(deals[i].departure);
         }
         if (
-          deals[i].arrival.substring(0, from.length) == from &&
+          deals[i].arrival.substring(0, from.length).toUpperCase() ==
+            from.toUpperCase() &&
           !responseData.includes(deals[i].arrival)
         ) {
           responseData.push(deals[i].arrival);
