@@ -7,7 +7,7 @@ class DealsService {
     );
   }
   getPlaces(from) {
-    return http.get(`/travel/places/from=${from}`);
+    return http.get(`/travel/places`);
   }
 }
 

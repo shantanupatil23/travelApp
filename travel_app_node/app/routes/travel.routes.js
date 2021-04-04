@@ -8,7 +8,7 @@ module.exports = (app) => {
     travel.findDeals
   );
 
-  router.get(["/places/from=", "/places/from=:from"], travel.places);
+  router.get("/places", travel.findPlaces);
 
   app.use("/api/travel", router);
 };

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import DealsService from "../services/deals.service";
+import { Dropdown } from "react-dropdown-now";
+import "react-dropdown-now/style.css";
 
 export default class Deals extends Component {
   constructor(props) {
@@ -17,11 +19,18 @@ export default class Deals extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this.getPlaces();
+  }
+
   sort(sortedDeals, type) {
     if (type === "cheapest") {
       for (let i = 0; i < sortedDeals.length; i++) {
         for (let j = 0; j < sortedDeals.length; j++) {
-          if (sortedDeals[i].cost < sortedDeals[j].cost) {
+          if (
+            sortedDeals[i].cost - sortedDeals[i].discount <
+            sortedDeals[j].cost - sortedDeals[j].discount
+          ) {
             let temp = sortedDeals[i];
             sortedDeals[i] = sortedDeals[j];
             sortedDeals[j] = temp;
@@ -64,20 +73,26 @@ export default class Deals extends Component {
   };
 
   handleChange(event) {
-    this.suggestPlaces(event.target.value);
+    this.getPlaces(event.target.value);
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
 
   handleSubmit(event) {
-    const { departure, arrival } = this.state;
     event.preventDefault();
-    this.retrieveDeals(departure, arrival);
+    const { departure, arrival, type } = this.state;
+    DealsService.getDeals(departure, arrival)
+      .then((response) => {
+        this.sort(response.data, type);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
-  suggestPlaces(from) {
-    DealsService.getPlaces(from)
+  getPlaces() {
+    DealsService.getPlaces()
       .then((response) => {
         this.setState({
           places: response.data,
@@ -88,19 +103,26 @@ export default class Deals extends Component {
       });
   }
 
-  retrieveDeals(departure, arrival) {
-    DealsService.getDeals(departure, arrival)
-      .then((response) => {
-        this.sort(response.data, "cheapest");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-
   renderDeals(deals) {
     if (deals.length !== 0) {
-      return JSON.stringify(deals);
+      let dealsColumn = [];
+      for (const deal in deals) {
+        dealsColumn.push(
+          <div className="row">
+            <p>{deals[deal].transport}</p>
+            <p>{deals[deal].reference}</p>
+            <p>{deals[deal].departure}</p>
+            <p>{deals[deal].arrival}</p>
+            <p>
+              {deals[deal].duration.h}h {deals[deal].duration.m}m
+            </p>
+            <p>{deals[deal].cost} </p>
+            <p>{deals[deal].discount} </p>
+            <p>{deals[deal].cost - deals[deal].discount}</p>
+          </div>
+        );
+      }
+      return dealsColumn;
     } else {
       return "No Deals Found";
     }
@@ -111,30 +133,21 @@ export default class Deals extends Component {
 
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            <input
-              name="departure"
-              placeholder="departure"
-              type="text"
-              value={this.state.departure}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label>
-            <input
-              name="arrival"
-              placeholder="arrival"
-              type="text"
-              value={this.state.arrival}
-              onChange={this.handleChange}
-            />
-          </label>
+        <form className="row" onSubmit={this.handleSubmit}>
+          <Dropdown
+            placeholder="Departure"
+            options={places}
+            onChange={(value) => this.setState({ departure: value.label })}
+          />
+          <Dropdown
+            placeholder="Arrival"
+            options={places}
+            onChange={(value) => this.setState({ arrival: value.label })}
+          />
+          <button onClick={this.toggleCheapest}>cheapest</button>
+          <button onClick={this.toggleFastest}>fastest</button>
           <input type="submit" value="Submit" />
         </form>
-        <button onClick={this.toggleCheapest}>cheapest</button>
-        <button onClick={this.toggleFastest}>fastest</button>
-        {JSON.stringify(places)}
         {this.renderDeals(deals)}
       </div>
     );

@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import DealsList from "./components/deals-list.component";
+import Home from "./components/home";
 
 class App extends Component {
   render() {
@@ -11,7 +11,7 @@ class App extends Component {
       <div>
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/"]} component={DealsList} />
+            <Route exact path={["/"]} component={Home} />
           </Switch>
         </div>
       </div>

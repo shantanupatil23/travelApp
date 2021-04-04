@@ -28,28 +28,16 @@ exports.findDeals = (req, res) => {
       });
     });
 };
-exports.places = (req, res) => {
-  let from = req.params.from;
-  if (from == null) {
-    from = "";
-  }
+exports.findPlaces = (req, res) => {
   Datasets.find()
     .then((data) => {
       let responseData = [];
       const deals = data[0].toObject().deals;
       for (const i in deals) {
-        if (
-          deals[i].departure.substring(0, from.length).toUpperCase() ==
-            from.toUpperCase() &&
-          !responseData.includes(deals[i].departure)
-        ) {
+        if (!responseData.includes(deals[i].departure)) {
           responseData.push(deals[i].departure);
         }
-        if (
-          deals[i].arrival.substring(0, from.length).toUpperCase() ==
-            from.toUpperCase() &&
-          !responseData.includes(deals[i].arrival)
-        ) {
+        if (!responseData.includes(deals[i].arrival)) {
           responseData.push(deals[i].arrival);
         }
       }
