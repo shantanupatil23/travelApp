@@ -1,12 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import Home from "./components/home";
 
-import App from "./App";
-
-ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById("root")
-);
+ReactDOM.render(<Home />, document.getElementById("root"));

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DealsService from "../services/deals.service";
 import { Dropdown } from "react-dropdown-now";
 import "react-dropdown-now/style.css";
+import img_bg from "../assets/img_bg.jpg";
 
 export default class Deals extends Component {
   constructor(props) {
@@ -133,22 +134,53 @@ export default class Deals extends Component {
 
     return (
       <div>
-        <form className="row" onSubmit={this.handleSubmit}>
-          <Dropdown
-            placeholder="Departure"
-            options={places}
-            onChange={(value) => this.setState({ departure: value.label })}
-          />
-          <Dropdown
-            placeholder="Arrival"
-            options={places}
-            onChange={(value) => this.setState({ arrival: value.label })}
-          />
-          <button onClick={this.toggleCheapest}>cheapest</button>
-          <button onClick={this.toggleFastest}>fastest</button>
-          <input type="submit" value="Submit" />
-        </form>
-        {this.renderDeals(deals)}
+        <img src={img_bg} alt="background_image"></img>
+        <div className="searchDiv">
+          <form onSubmit={this.handleSubmit}>
+            <h2>Search for best Deals</h2>
+            <Dropdown
+              className="dropdown"
+              placeholder="Departure"
+              options={places}
+              onChange={(value) => this.setState({ departure: value.label })}
+            />
+            <Dropdown
+              className="dropdown"
+              placeholder="Arrival"
+              options={places}
+              onChange={(value) => this.setState({ arrival: value.label })}
+            />
+            <input type="submit" value="Search" />
+          </form>
+        </div>
+        <div>
+          <div className="sortDiv">
+            <p>
+              Sort By:&nbsp;
+              <button
+                className={
+                  this.state.type === "cheapest"
+                    ? "activeButton"
+                    : "inactiveButton"
+                }
+                onClick={this.toggleCheapest}
+              >
+                Cheapest
+              </button>
+              <button
+                className={
+                  this.state.type === "fastest"
+                    ? "activeButton"
+                    : "inactiveButton"
+                }
+                onClick={this.toggleFastest}
+              >
+                Fastest
+              </button>
+            </p>
+          </div>
+          {this.renderDeals(deals)}
+        </div>
       </div>
     );
   }
