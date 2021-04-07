@@ -22,9 +22,16 @@ export default class Deals extends Component {
 
   componentDidMount() {
     this.getPlaces();
+    DealsService.getDeals("London", "Amsterdam")
+      .then((response) => {
+        this.sortByTime(response.data, "cheapest");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
-  sort(sortedDeals, type) {
+  sortByTime(sortedDeals, type) {
     if (type === "cheapest") {
       for (let i = 0; i < sortedDeals.length; i++) {
         for (let j = 0; j < sortedDeals.length; j++) {
@@ -62,7 +69,7 @@ export default class Deals extends Component {
       type: "cheapest",
     });
     const { deals } = this.state;
-    this.sort(deals, "cheapest");
+    this.sortByTime(deals, "cheapest");
   };
 
   toggleFastest = () => {
@@ -70,7 +77,7 @@ export default class Deals extends Component {
       type: "fastest",
     });
     const { deals } = this.state;
-    this.sort(deals, "fastest");
+    this.sortByTime(deals, "fastest");
   };
 
   handleChange(event) {
@@ -85,7 +92,7 @@ export default class Deals extends Component {
     const { departure, arrival, type } = this.state;
     DealsService.getDeals(departure, arrival)
       .then((response) => {
-        this.sort(response.data, type);
+        this.sortByTime(response.data, type);
       })
       .catch((e) => {
         console.log(e);
@@ -96,7 +103,7 @@ export default class Deals extends Component {
     DealsService.getPlaces()
       .then((response) => {
         this.setState({
-          places: response.data,
+          places: response.data.sort(),
         });
       })
       .catch((e) => {
@@ -104,22 +111,55 @@ export default class Deals extends Component {
       });
   }
 
+  showEmoji(transport) {
+    switch (transport) {
+      case "car":
+        return "🚗";
+      case "bus":
+        return "🚌";
+      case "train":
+        return "🚂";
+      default:
+        return "🚂";
+    }
+  }
+
   renderDeals(deals) {
     if (deals.length !== 0) {
       let dealsColumn = [];
       for (const deal in deals) {
         dealsColumn.push(
-          <div className="row">
-            <p>{deals[deal].transport}</p>
-            <p>{deals[deal].reference}</p>
-            <p>{deals[deal].departure}</p>
-            <p>{deals[deal].arrival}</p>
-            <p>
-              {deals[deal].duration.h}h {deals[deal].duration.m}m
+          <div className="row divDeal">
+            <p className="pTransport">
+              {this.showEmoji(deals[deal].transport)}
             </p>
-            <p>{deals[deal].cost} </p>
-            <p>{deals[deal].discount} </p>
-            <p>{deals[deal].cost - deals[deal].discount}</p>
+            <div className="dealDiv">
+              <p className="dealHeading">Vehicle id:</p>
+              <p className="dealBody">{deals[deal].reference}</p>
+            </div>
+            <div className="dealDiv">
+              <p className="dealHeading">Duration:</p>
+              <p className="dealBody">
+                <strong>{deals[deal].duration.h}</strong>h{" "}
+                {deals[deal].duration.m}m
+              </p>
+            </div>
+            <div className="dealDiv">
+              <p className="dealHeading">Price:</p>
+              <p className="dealBody">
+                <strike>{deals[deal].cost}</strike>-{deals[deal].discount}
+              </p>
+            </div>
+            <div className="dealDiv">
+              <p className=" dealBody dealBig">
+                {deals[deal].cost - deals[deal].discount}€
+              </p>
+            </div>
+            <button className="dealButton">
+              Book
+              <br />
+              Now
+            </button>
           </div>
         );
       }
@@ -134,28 +174,44 @@ export default class Deals extends Component {
 
     return (
       <div>
-        <img src={img_bg} alt="background_image"></img>
-        <div className="searchDiv">
-          <form onSubmit={this.handleSubmit}>
-            <h2>Search for best Deals</h2>
-            <Dropdown
-              className="dropdown"
-              placeholder="Departure"
-              options={places}
-              onChange={(value) => this.setState({ departure: value.label })}
-            />
-            <Dropdown
-              className="dropdown"
-              placeholder="Arrival"
-              options={places}
-              onChange={(value) => this.setState({ arrival: value.label })}
-            />
-            <input type="submit" value="Search" />
-          </form>
-        </div>
-        <div>
-          <div className="sortDiv">
-            <p>
+        <div className="row divMainRow">
+          <div>
+            <div className="divSearch">
+              <form onSubmit={this.handleSubmit}>
+                <h2>Search for best Deals</h2>
+                <div className="divDropdown">
+                  <Dropdown
+                    className="dropdown"
+                    placeholder="Departure"
+                    options={places}
+                    onChange={(value) =>
+                      this.setState({ departure: value.label })
+                    }
+                  />
+                  <div className="dividerDropdown"></div>
+                  <Dropdown
+                    className="dropdown"
+                    placeholder="Arrival"
+                    options={places}
+                    onChange={(value) =>
+                      this.setState({ arrival: value.label })
+                    }
+                  />
+                </div>
+                <input type="submit" value="Search" />
+              </form>
+            </div>
+            <img src={img_bg} alt="Travel App" />
+          </div>
+          <div className="divDeals">
+            {/* <p>
+              from <strong>{this.state.departure}</strong> to{" "}
+              <strong>{this.state.arrival}</strong>
+            </p> */}
+            <p className="pDealsLocations">
+              from <strong>London</strong> to <strong>Amsterdam</strong>
+            </p>
+            <p className="pDealsSort">
               Sort By:&nbsp;
               <button
                 className={
@@ -166,7 +222,7 @@ export default class Deals extends Component {
                 onClick={this.toggleCheapest}
               >
                 Cheapest
-              </button>
+              </button>{" "}
               <button
                 className={
                   this.state.type === "fastest"
@@ -178,8 +234,8 @@ export default class Deals extends Component {
                 Fastest
               </button>
             </p>
+            {this.renderDeals(deals)}
           </div>
-          {this.renderDeals(deals)}
         </div>
       </div>
     );
