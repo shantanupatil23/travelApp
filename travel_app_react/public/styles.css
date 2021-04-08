@@ -68,6 +68,29 @@ img {
   padding: 3vh 1.5vw;
 }
 
+.divCar {
+  padding: 0;
+  position: relative;
+}
+
+h3 {
+  bottom: 1vh;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.5vw;
+}
+
+.gif_car {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+
 .pDealsLocations {
   color: white;
   font-size: 2.4vh;
@@ -106,7 +129,7 @@ img {
   margin-bottom: 2.5vh;
   justify-content: space-between;
   align-content: center;
-  padding: 0 1vw 0 3vw ;
+  padding: 0 1vw 0 3vw;
 }
 
 .pTransport {
@@ -132,13 +155,13 @@ img {
   margin-bottom: 0;
 }
 
-.dealBig{
+.dealBig {
   font-size: 6vh;
   margin-top: 1vh;
   letter-spacing: 3px;
 }
 
-.dealButton{
+.dealButton {
   height: 10vh;
   width: 5vw;
   background-color: white;

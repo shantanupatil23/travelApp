@@ -3,6 +3,7 @@ import DealsService from "../services/deals.service";
 import { Dropdown } from "react-dropdown-now";
 import "react-dropdown-now/style.css";
 import img_bg from "../assets/img_bg.jpg";
+import gif_car from "../assets/gif_car.gif";
 
 export default class Deals extends Component {
   constructor(props) {
@@ -14,6 +15,8 @@ export default class Deals extends Component {
       type: "cheapest",
       departure: "",
       arrival: "",
+      searchedDeparture: "",
+      searchedArrival: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -22,13 +25,6 @@ export default class Deals extends Component {
 
   componentDidMount() {
     this.getPlaces();
-    DealsService.getDeals("London", "Amsterdam")
-      .then((response) => {
-        this.sortByTime(response.data, "cheapest");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
   }
 
   sortByTime(sortedDeals, type) {
@@ -92,6 +88,10 @@ export default class Deals extends Component {
     const { departure, arrival, type } = this.state;
     DealsService.getDeals(departure, arrival)
       .then((response) => {
+        this.setState({
+          searchedDeparture: departure,
+          searchedArrival: arrival,
+        });
         this.sortByTime(response.data, type);
       })
       .catch((e) => {
@@ -122,6 +122,10 @@ export default class Deals extends Component {
       default:
         return "🚂";
     }
+  }
+
+  book() {
+    alert("You ticket is succesfully booked!");
   }
 
   renderDeals(deals) {
@@ -155,7 +159,7 @@ export default class Deals extends Component {
                 {deals[deal].cost - deals[deal].discount}€
               </p>
             </div>
-            <button className="dealButton">
+            <button className="dealButton" onClick={this.book}>
               Book
               <br />
               Now
@@ -165,7 +169,16 @@ export default class Deals extends Component {
       }
       return dealsColumn;
     } else {
-      return "No Deals Found";
+      return (
+        <div className="row divDeal">
+          <div className="dealDiv">
+            <p className="dealHeading">Uh Oh!</p>
+            <p className="dealBody">
+              There are no deals available for your selected places.
+            </p>
+          </div>
+        </div>
+      );
     }
   }
 
@@ -203,39 +216,44 @@ export default class Deals extends Component {
             </div>
             <img src={img_bg} alt="Travel App" />
           </div>
-          <div className="divDeals">
-            {/* <p>
-              from <strong>{this.state.departure}</strong> to{" "}
-              <strong>{this.state.arrival}</strong>
-            </p> */}
-            <p className="pDealsLocations">
-              from <strong>London</strong> to <strong>Amsterdam</strong>
-            </p>
-            <p className="pDealsSort">
-              Sort By:&nbsp;
-              <button
-                className={
-                  this.state.type === "cheapest"
-                    ? "activeButton"
-                    : "inactiveButton"
-                }
-                onClick={this.toggleCheapest}
-              >
-                Cheapest
-              </button>{" "}
-              <button
-                className={
-                  this.state.type === "fastest"
-                    ? "activeButton"
-                    : "inactiveButton"
-                }
-                onClick={this.toggleFastest}
-              >
-                Fastest
-              </button>
-            </p>
-            {this.renderDeals(deals)}
-          </div>
+          {this.state.searchedDeparture !== "" &&
+          this.state.searchedArrival !== null ? (
+            <div className="divDeals">
+              <p className="pDealsLocations">
+                from <strong>{this.state.searchedDeparture}</strong> to{" "}
+                <strong>{this.state.searchedArrival}</strong>
+              </p>
+              <p className="pDealsSort">
+                Sort By:&nbsp;
+                <button
+                  className={
+                    this.state.type === "cheapest"
+                      ? "activeButton"
+                      : "inactiveButton"
+                  }
+                  onClick={this.toggleCheapest}
+                >
+                  Cheapest
+                </button>{" "}
+                <button
+                  className={
+                    this.state.type === "fastest"
+                      ? "activeButton"
+                      : "inactiveButton"
+                  }
+                  onClick={this.toggleFastest}
+                >
+                  Fastest
+                </button>
+              </p>
+              {this.renderDeals(deals)}
+            </div>
+          ) : (
+            <div className="divDeals divCar">
+              <h3>Go ahead and do your Search!</h3>
+              <img className="gif_car" src={gif_car} alt="flying car" />
+            </div>
+          )}
         </div>
       </div>
     );
