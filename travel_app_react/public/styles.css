@@ -2,7 +2,7 @@ body {
   background-color: #6bc3ee;
   height: 100vh;
   width: 100vw;
-  padding: 4vh 4vh 0;
+  padding: 4vh 4vh;
   margin: 0;
   font-family: "Montserrat", sans-serif;
 }
@@ -12,18 +12,19 @@ body {
 }
 
 .divSearch {
-  height: 47vh;
+  height: 450px;
   width: 33vw;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #00A9E4;
   border: 5px solid #027db3;
   vertical-align: top;
-  padding: 3vh 1.5vw;
+  padding: 30px 1.5vw;
 }
 
 h2 {
   color: white;
   font-weight: 600;
   letter-spacing: 1px;
+  height: 5vh;
 }
 
 .divDropdown {
@@ -31,7 +32,7 @@ h2 {
 }
 
 .dropdown {
-  font-size: 2.5vh;
+  font-size: 25px;
   margin: 2px 0;
   border: 1px solid white;
   border-radius: 10px;
@@ -43,13 +44,13 @@ h2 {
 }
 
 input {
-  height: 7vh;
+  height: 70px;
   width: 29.5vw;
   background-color: white;
   border: 1px solid white;
   border-radius: 10px;
   color: #52575c;
-  font-size: 3vh;
+  font-size: 30px;
   font-weight: 600;
   letter-spacing: 2px;
 }
@@ -61,11 +62,12 @@ img {
 }
 
 .divDeals {
-  height: 92vh;
+  height: auto;
   width: 60vw;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #00A9E4;
   border: 5px solid #027db3;
   padding: 3vh 1.5vw;
+  margin-bottom: 3vh;
 }
 
 .divCar {
@@ -79,7 +81,7 @@ h3 {
   text-align: center;
   position: absolute;
   color: white;
-  font-weight: 600;
+  font-weight: bolder;
   letter-spacing: 0.5vw;
 }
 
@@ -93,21 +95,21 @@ h3 {
 
 .pDealsLocations {
   color: white;
-  font-size: 2.4vh;
+  font-size: 24px;
   letter-spacing: 1.5px;
 }
 
 .pDealsSort {
-  margin-top: -3vh;
+  margin-top: -30px;
   text-align: end;
   color: white;
-  font-size: 2.4vh;
+  font-size: 24px;
   letter-spacing: 1.5px;
 }
 
 .activeButton {
   color: white;
-  font-size: 2.4vh;
+  font-size: 24px;
   letter-spacing: 1.5px;
   background: none;
   border: none;
@@ -116,24 +118,24 @@ h3 {
 
 .inactiveButton {
   color: white;
-  font-size: 2.4vh;
+  font-size: 24px;
   letter-spacing: 1.5px;
   background: none;
   border: none;
 }
 
 .divDeal {
-  height: 13vh;
+  height: 130px;
   width: 58vw;
   background-color: white;
-  margin-bottom: 2.5vh;
+  margin-bottom: 25px;
   justify-content: space-between;
   align-content: center;
   padding: 0 1vw 0 3vw;
 }
 
 .pTransport {
-  font-size: 5vh;
+  font-size: 2.5vw;
 }
 
 .dealDiv {
@@ -142,29 +144,29 @@ h3 {
 
 .dealHeading {
   color: rgba(0, 0, 0, 0.5);
-  font-size: 2vh;
-  line-height: 3vh;
-  margin-top: 1vh;
-  margin-bottom: -1vh;
+  font-size: 1vw;
+  line-height: 30px;
+  margin-top: 10px;
+  margin-bottom: -10px;
 }
 
 .dealBody {
   margin-top: 0;
   color: rgba(0, 0, 0, 0.75);
-  font-size: 4vh;
+  font-size: 2vw;
   margin-bottom: 0;
 }
 
 .dealBig {
-  font-size: 6vh;
-  margin-top: 1vh;
+  font-size: 3vw;
+  margin-top: 10px;
   letter-spacing: 3px;
 }
 
 .dealButton {
-  height: 10vh;
+  height: 100px;
   width: 5vw;
   background-color: white;
-  font-size: 2vh;
+  font-size: 1vw;
   border-color: rgba(0, 0, 0, 0.2);
 }
