@@ -1,10 +1,10 @@
 body {
   background-color: #6bc3ee;
-  height: 100vh;
-  width: 100vw;
-  padding: 4vh 4vh;
-  margin: 0;
   font-family: "Montserrat", sans-serif;
+  height: 100vh;
+  margin: 0;
+  padding: 4vh 4vh;
+  width: 100vw;
 }
 
 .divMainRow {
@@ -12,19 +12,19 @@ body {
 }
 
 .divSearch {
-  height: 450px;
-  width: 33vw;
   background-color: #00A9E4;
   border: 5px solid #027db3;
-  vertical-align: top;
+  height: 450px;
   padding: 30px 1.5vw;
+  vertical-align: top;
+  width: 33vw;
 }
 
 h2 {
   color: white;
   font-weight: 600;
-  letter-spacing: 1px;
   height: 5vh;
+  letter-spacing: 1px;
 }
 
 .divDropdown {
@@ -32,11 +32,11 @@ h2 {
 }
 
 .dropdown {
-  font-size: 25px;
-  margin: 2px 0;
+  background-color: white;
   border: 1px solid white;
   border-radius: 10px;
-  background-color: white;
+  font-size: 25px;
+  margin: 2px 0;
 }
 
 .dividerDropdown {
@@ -44,30 +44,30 @@ h2 {
 }
 
 input {
-  height: 70px;
-  width: 29.5vw;
   background-color: white;
   border: 1px solid white;
   border-radius: 10px;
   color: #52575c;
   font-size: 30px;
   font-weight: 600;
+  height: 70px;
   letter-spacing: 2px;
+  width: 29.5vw;
 }
 
 img {
   height: 43vh;
-  width: 21vw;
   margin: 5vh 0 0 5vw;
+  width: 21vw;
 }
 
 .divDeals {
-  height: auto;
-  width: 60vw;
   background-color: #00A9E4;
   border: 5px solid #027db3;
-  padding: 3vh 1.5vw;
+  height: auto;
   margin-bottom: 3vh;
+  padding: 3vh 1.5vw;
+  width: 60vw;
 }
 
 .divCar {
@@ -77,19 +77,19 @@ img {
 
 h3 {
   bottom: 1vh;
-  width: 100%;
-  text-align: center;
-  position: absolute;
   color: white;
   font-weight: bolder;
   letter-spacing: 0.5vw;
+  position: absolute;
+  text-align: center;
+  width: 100%;
 }
 
 .gif_car {
   height: 100%;
-  width: 100%;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 
@@ -100,38 +100,38 @@ h3 {
 }
 
 .pDealsSort {
-  margin-top: -30px;
-  text-align: end;
   color: white;
   font-size: 24px;
   letter-spacing: 1.5px;
+  margin-top: -30px;
+  text-align: end;
 }
 
 .activeButton {
-  color: white;
-  font-size: 24px;
-  letter-spacing: 1.5px;
   background: none;
   border: none;
+  color: white;
+  font-size: 24px;
   font-weight: bold;
+  letter-spacing: 1.5px;
 }
 
 .inactiveButton {
+  background: none;
+  border: none;
   color: white;
   font-size: 24px;
   letter-spacing: 1.5px;
-  background: none;
-  border: none;
 }
 
 .divDeal {
-  height: 130px;
-  width: 58vw;
-  background-color: white;
-  margin-bottom: 25px;
-  justify-content: space-between;
   align-content: center;
+  background-color: white;
+  height: 130px;
+  justify-content: space-between;
+  margin-bottom: 25px;
   padding: 0 1vw 0 3vw;
+  width: 58vw;
 }
 
 .pTransport {
@@ -146,27 +146,27 @@ h3 {
   color: rgba(0, 0, 0, 0.5);
   font-size: 1vw;
   line-height: 30px;
-  margin-top: 10px;
   margin-bottom: -10px;
+  margin-top: 10px;
 }
 
 .dealBody {
-  margin-top: 0;
   color: rgba(0, 0, 0, 0.75);
   font-size: 2vw;
   margin-bottom: 0;
+  margin-top: 0;
 }
 
 .dealBig {
   font-size: 3vw;
-  margin-top: 10px;
   letter-spacing: 3px;
+  margin-top: 10px;
 }
 
 .dealButton {
+  background-color: white;
+  border-color: rgba(0, 0, 0, 0.2);
+  font-size: 1vw;
   height: 100px;
   width: 5vw;
-  background-color: white;
-  font-size: 1vw;
-  border-color: rgba(0, 0, 0, 0.2);
 }

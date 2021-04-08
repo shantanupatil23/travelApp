@@ -1,7 +1,7 @@
 import http from "../http-common";
 
 class DealsService {
-  getDeals(source, destination, type) {
+  getDeals(source, destination) {
     return http.get(
       `/travel/find-route/source=${source}&destination=${destination}`
     );

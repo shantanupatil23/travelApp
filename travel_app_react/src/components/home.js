@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import DealsService from "../services/deals.service";
 import { Dropdown } from "react-dropdown-now";
-import "react-dropdown-now/style.css";
 import img_bg from "../assets/img_bg.jpg";
 import gif_car from "../assets/gif_car.gif";
 
