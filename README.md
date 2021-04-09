@@ -1,6 +1,6 @@
-# travelApp
+# Travel App
 
-## Setup
+## Initial Setup
 To run this project, install it locally using npm:
 
 Server Side
