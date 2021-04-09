@@ -3,6 +3,7 @@ import DealsService from "../services/deals.service";
 import { Dropdown } from "react-dropdown-now";
 import img_bg from "../assets/img_bg.jpg";
 import gif_car from "../assets/gif_car.gif";
+import "react-dropdown-now/style.css";
 
 export default class Deals extends Component {
   constructor(props) {
